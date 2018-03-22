@@ -58,8 +58,16 @@ public class MainActivity extends AppCompatActivity
                 requestForSpecificPermission();
             } else {
 
+                PermissionGranted();
+
             }
         }
+
+    }
+
+    void PermissionGranted(){
+
+
 
     }
 
@@ -83,8 +91,7 @@ public class MainActivity extends AppCompatActivity
         switch (requestCode) {
             case 101:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+                    PermissionGranted();
 
                 } else {
 
