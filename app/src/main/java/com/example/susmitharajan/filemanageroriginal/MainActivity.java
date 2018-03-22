@@ -71,6 +71,9 @@ public class MainActivity extends AppCompatActivity
     private void displaySelectedScreen(int id){
         Fragment fragment = null;
         switch (id){
+            case R.id.nav_home:
+                fragment = new Home();
+                break;
             case R.id.nav_internal:
                 fragment = new Internal();
                 break;
