@@ -13,15 +13,14 @@
         android:layout_toEndOf="@+id/imageView"
         android:layout_toRightOf="@+id/imageView"
         android:paddingBottom="10dp"
-        android:text="Spiderman"
         android:textAlignment="center"
-        android:textSize="35dp"
+        style="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
 
     <TextView
         android:id="@+id/textViewTeam"
@@ -31,9 +30,8 @@
         android:layout_toEndOf="@+id/imageView"
         android:layout_toRightOf="@+id/imageView"
         android:paddingTop="10dp"
-        android:text="Spiderman"
         android:textAlignment="center"
-        android:textSize="25dp"
+        style="@style/Base.TextAppearance.AppCompat.Medium"
         android:textStyle="bold" />
 
 

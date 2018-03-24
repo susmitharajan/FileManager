@@ -50,7 +50,7 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
         custom_internal hero = heroList.get(position);
         imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(hero.getName());
-        textViewTeam.setText(hero.getTeam());
+        textViewTeam.setText(String.valueOf(hero.getModified()));
 
         return view;
     }

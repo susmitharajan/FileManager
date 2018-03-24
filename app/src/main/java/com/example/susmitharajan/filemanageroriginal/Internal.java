@@ -11,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,14 +35,34 @@ public class Internal extends Fragment {
         getActivity().setTitle("Internal Storage");
 
         File root=new File(Environment.getExternalStorageDirectory().getAbsolutePath());
-        String[] files = getListFiles(root);
+       // String[] files = getListFiles(root);
+
+        //test
+
+        File[] files = root.listFiles();
+        String[] filelist = new String[files.length];
+        String[] lastModified = new String[files.length];
+
+
+        int i= 0,y=0;
+        for (File file : files) {
+            filelist[i++] = file.getName().toString();
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy  hh:mm a");
+
+            Date lastMod = new Date(file.lastModified());
+            lastModified[y++] = format.format(Date.parse(lastMod.toString()));
+
+        }
+
+        //test
 
 
         heroList = new ArrayList<>();
         listView = (ListView) getView().findViewById(R.id.listView);
 
-        for(int i = 0; i < files.length; i++){
-            heroList.add(new custom_internal(R.drawable.nature, files[i], "Avengers"));
+        for(int j = 0; j < filelist.length; j++){
+            heroList.add(new custom_internal(R.drawable.icon_folder, filelist[j], lastModified[j]));
         }
 
         //creating the adapter
@@ -57,14 +79,17 @@ public class Internal extends Fragment {
         return inflater.inflate(R.layout.internal, container, false);
     }
 
-    String[] getListFiles(File parentDir) {
-        ArrayList<File> inFiles = new ArrayList<File>();
+    /*String[] getListFiles(File parentDir) {
+
         File[] files = parentDir.listFiles();
         String[] filelist = new String[files.length];
-        int i= 0;
+        long[] lastModified = new long[files.length];
+        int i= 0,y=0;
         for (File file : files) {
-            filelist[i++] = file.toString();
+            filelist[i++] = file.getName().toString();
+            lastModified[y++] = file.lastModified();
+
         }
         return filelist;
-    }
+    }*/
 }

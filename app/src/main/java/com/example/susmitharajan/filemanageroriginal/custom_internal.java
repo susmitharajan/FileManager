@@ -6,12 +6,13 @@ package com.example.susmitharajan.filemanageroriginal;
 
 public class custom_internal {
     int image;
-    String name, team;
+    String name;
+    String modified;
 
-    public custom_internal(int image, String name, String team) {
+    public custom_internal(int image, String name, String modified) {
         this.image = image;
         this.name = name;
-        this.team = team;
+        this.modified = modified;
     }
 
     public int getImage() {
@@ -22,7 +23,7 @@ public class custom_internal {
         return name;
     }
 
-    public String getTeam() {
-        return team;
+    public String getModified() {
+        return modified;
     }
 }
