@@ -9,12 +9,14 @@ public class custom_internal {
     String name;
     String modified;
     String path;
+    String number_of_children;
 
-    public custom_internal(int image, String name, String modified,String path) {
+    public custom_internal(int image, String name, String modified,String path,String number_of_children) {
         this.image = image;
         this.name = name;
         this.modified = modified;
         this.path = path;
+        this.number_of_children = number_of_children;
     }
 
     public int getImage() {
@@ -32,4 +34,6 @@ public class custom_internal {
     public String getModified() {
         return modified;
     }
+
+    public String getChilren() { return number_of_children; }
 }

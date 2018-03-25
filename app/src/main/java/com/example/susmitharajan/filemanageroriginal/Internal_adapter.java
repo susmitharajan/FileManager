@@ -3,6 +3,7 @@ package com.example.susmitharajan.filemanageroriginal;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,11 +52,13 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
         TextView textViewTeam = view.findViewById(R.id.textViewTeam);
         final ImageView imageView1 = view.findViewById(R.id.popup);
         ImageView add = view.findViewById(R.id.add);
+        TextView children = view.findViewById(R.id.children);
 
         custom_internal hero = heroList.get(position);
         imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(hero.getName());
         textViewTeam.setText(String.valueOf(hero.getModified()));
+        children.setText(hero.getChilren());
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override

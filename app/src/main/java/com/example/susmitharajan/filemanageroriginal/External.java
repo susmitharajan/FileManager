@@ -42,69 +42,9 @@ public class External extends Fragment {
         getActivity().setTitle("External Storage");
 
        // File root=new File(Environment.getExternalStorageDirectory().getAbsolutePath());
-         String[] file1 = getExternalStorageDirectories();
-
-        File root = new File(file1[0]);
-        if(strtext!=null){
-            root = new File(strtext);
-        }
-        //test
-
-        File[] files = root.listFiles();
-        int size = files.length;
-        String[] filelist = new String[size];
-        String[] lastModified = new String[size];
-        String[] path = new String[size];
-
-        int i= 0,y=0,k=0;
-        for (File file : files) {
-            if(!file.isHidden()){
-                filelist[i++] = file.getName().toString();
-                path[k++] = file.toString();
-                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy  hh:mm a");
-
-                Date lastMod = new Date(file.lastModified());
-                lastModified[y++] = format.format(Date.parse(lastMod.toString()));
-            }
-            else{
-                size = size - 1;
-            }
+      //   String[] file1 = getExternalStorageDirectories();
 
 
-        }
-
-        //test
-
-
-        heroList = new ArrayList<>();
-        listView = (ListView) getView().findViewById(R.id.listView);
-
-        for(int j = 0; j < size; j++){
-            heroList.add(new custom_internal(R.drawable.icon_folder, filelist[j], lastModified[j], path[j]));
-        }
-
-        //creating the adapter
-        Internal_adapter adapter = new Internal_adapter(getContext(), R.layout.internal_listview, heroList);
-
-        //attaching adapter to the listview
-        listView.setAdapter(adapter);
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                custom_internal hero = heroList.get(i);
-                Bundle bundle=new Bundle();
-                bundle.putString("Name", hero.getPath());
-                Internal nextFrag= new Internal();
-                nextFrag.setArguments(bundle);
-
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.layout_container, nextFrag,"FRAGMENT_TAG")
-                        .addToBackStack(null)
-                        .commit();
-            }
-        });
     }
 
     public String[] getExternalStorageDirectories() {
@@ -179,15 +119,15 @@ public class External extends Fragment {
         return storageDirectories;
     }
 
-    @Nullable
+   /* @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(getArguments()!=null){
+       *//* if(getArguments()!=null){
             strtext = getArguments().getString("Name");
         }
         if(container!=null){
             container.removeAllViews();
         }
-        return inflater.inflate(R.layout.internal, container, false);
-    }
+        return inflater.inflate(R.layout.internal, container, false);*//*
+    }*/
 }

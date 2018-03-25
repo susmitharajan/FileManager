@@ -70,7 +70,18 @@ public class Internal extends Fragment {
         listView = (ListView) getView().findViewById(R.id.listView);
 
         for(int j = 0; j < size; j++){
-            heroList.add(new custom_internal(R.drawable.icon_folder, filelist[j], lastModified[j], path[j]));
+            File children_count = new File(path[j]);
+            int count = 0;
+            if(children_count.listFiles() != null)
+            {
+                File[] files1 = children_count.listFiles();
+                for(int t=0; t<files1.length; t++){
+                    if(!files1[t].isHidden())
+                        count++;
+                }
+            }
+
+            heroList.add(new custom_internal(R.drawable.icon_folder, filelist[j], lastModified[j], path[j],String.valueOf(count)));
         }
 
         //creating the adapter
