@@ -45,18 +45,26 @@ public class Internal extends Fragment {
         //test
 
         File[] files = root.listFiles();
-        String[] filelist = new String[files.length];
-        String[] lastModified = new String[files.length];
-        String[] path = new String[files.length];
+        int size = files.length;
+        String[] filelist = new String[size];
+        String[] lastModified = new String[size];
+        String[] path = new String[size];
 
         int i= 0,y=0,k=0;
         for (File file : files) {
-            filelist[i++] = file.getName().toString();
-            path[k++] = file.toString();
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy  hh:mm a");
+            if(!file.isHidden()){
+                filelist[i++] = file.getName().toString();
+                path[k++] = file.toString();
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy  hh:mm a");
 
-            Date lastMod = new Date(file.lastModified());
-            lastModified[y++] = format.format(Date.parse(lastMod.toString()));
+                Date lastMod = new Date(file.lastModified());
+                lastModified[y++] = format.format(Date.parse(lastMod.toString()));
+            }
+            else
+            {
+                size = size - 1;
+            }
+
 
         }
 
@@ -66,7 +74,7 @@ public class Internal extends Fragment {
         heroList = new ArrayList<>();
         listView = (ListView) getView().findViewById(R.id.listView);
 
-        for(int j = 0; j < filelist.length; j++){
+        for(int j = 0; j < size; j++){
             heroList.add(new custom_internal(R.drawable.icon_folder, filelist[j], lastModified[j], path[j]));
         }
 
