@@ -34,5 +34,12 @@
         style="@style/Base.TextAppearance.AppCompat.Medium"
         android:textStyle="bold" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_circle_black_48dp"
+        android:id="@+id/popup"
+        android:layout_alignParentRight="true"/>
+
 
 </RelativeLayout>
