@@ -47,7 +47,6 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
         View view = layoutInflater.inflate(resource, null, false);
 
         ImageView imageView = view.findViewById(R.id.imageView);
-
         TextView textViewName = view.findViewById(R.id.textViewName);
         TextView textViewTeam = view.findViewById(R.id.textViewTeam);
         final ImageView imageView1 = view.findViewById(R.id.popup);
@@ -57,8 +56,6 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
         imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(hero.getName());
         textViewTeam.setText(String.valueOf(hero.getModified()));
-//        add.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_add_circle_black_48dp));
-
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,8 +77,6 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
 
             }
         });
-
-
         return view;
     }
 }

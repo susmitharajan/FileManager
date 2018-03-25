@@ -42,10 +42,10 @@ public class Internal extends Fragment {
         if(strtext!=null){
             root = new File(strtext);
         }
-        //test
 
         File[] files = root.listFiles();
         int size = files.length;
+
         String[] filelist = new String[size];
         String[] lastModified = new String[size];
         String[] path = new String[size];
@@ -64,12 +64,7 @@ public class Internal extends Fragment {
             {
                 size = size - 1;
             }
-
-
         }
-
-        //test
-
 
         heroList = new ArrayList<>();
         listView = (ListView) getView().findViewById(R.id.listView);
@@ -89,16 +84,22 @@ public class Internal extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 custom_internal hero = heroList.get(i);
-                Bundle bundle=new Bundle();
-                bundle.putString("Name", hero.getPath());
-                Internal nextFrag= new Internal();
-                nextFrag.setArguments(bundle);
+                //Test
+                File name = new File(hero.getPath());
+                if(name.isDirectory()) {
+                    //Test
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Name", hero.getPath());
+                    Internal nextFrag = new Internal();
+                    nextFrag.setArguments(bundle);
 
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.layout_container, nextFrag,"FRAGMENT_TAG")
-                        .addToBackStack(null)
-                        .commit();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.layout_container, nextFrag, "FRAGMENT_TAG")
+                            .addToBackStack(null)
+                            .commit();
+                }
             }
+
         });
     }
 
