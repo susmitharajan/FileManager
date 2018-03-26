@@ -58,7 +58,7 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
         imageView.setImageDrawable(context.getResources().getDrawable(hero.getImage()));
         textViewName.setText(hero.getName());
         textViewTeam.setText(String.valueOf(hero.getModified()));
-        children.setText(hero.getChilren());
+        children.setText("("+hero.getChilren()+" items)");
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override

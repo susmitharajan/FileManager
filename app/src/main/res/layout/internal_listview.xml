@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="15dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="match_parent"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/imageView"
         android:layout_toRightOf="@+id/imageView"
-        android:paddingBottom="10dp"
-        android:textAlignment="center"
-        style="@style/Base.TextAppearance.AppCompat.Large"
-        android:textStyle="bold" />
+        />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp" />
 
     <TextView
         android:id="@+id/textViewTeam"
-        android:layout_width="match_parent"
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewName"
         android:layout_toEndOf="@+id/imageView"
         android:layout_toRightOf="@+id/imageView"
-        android:paddingTop="10dp"
-        android:textAlignment="center"
-        style="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textStyle="bold" />
+         />
 
     <ImageView
+        android:id="@+id/popup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_add_circle_black_48dp"
-        android:id="@+id/popup"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_more_vert_black_24dp" />
 
     <TextView
+        android:id="@+id/children"
+        style="@style/Base.TextAppearance.AppCompat.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/children"
-        android:layout_below="@+id/textViewTeam"
+        android:layout_below="@id/textViewName"
+        android:layout_toRightOf="@id/textViewTeam"
         />
 
 

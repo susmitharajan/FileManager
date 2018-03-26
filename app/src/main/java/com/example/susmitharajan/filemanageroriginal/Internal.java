@@ -81,7 +81,7 @@ public class Internal extends Fragment {
                 }
             }
 
-            heroList.add(new custom_internal(R.drawable.icon_folder, filelist[j], lastModified[j], path[j],String.valueOf(count)));
+            heroList.add(new custom_internal(R.drawable.ic_folder_black_24dp, filelist[j], lastModified[j], path[j],String.valueOf(count)));
         }
 
         //creating the adapter
