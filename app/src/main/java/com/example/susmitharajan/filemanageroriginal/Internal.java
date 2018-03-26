@@ -1,15 +1,21 @@
 package com.example.susmitharajan.filemanageroriginal;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -21,7 +27,7 @@ import java.util.List;
  * Created by susmitharajan on 22/03/18.
  */
 
-public class Internal extends Fragment {
+public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClickListener {
 
     List<custom_internal> heroList;
 
@@ -30,6 +36,9 @@ public class Internal extends Fragment {
     private List<String> fileList=new ArrayList<String>();
 
     String strtext = null;
+
+    private MyRecyclerViewAdapter adapter1;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -112,6 +121,36 @@ public class Internal extends Fragment {
             }
 
         });
+
+
+        //Test
+
+        ArrayList<Integer> viewColoers = new ArrayList<>();
+        viewColoers.add(Color.BLUE);
+        viewColoers.add(Color.YELLOW);
+        viewColoers.add(Color.MAGENTA);
+        viewColoers.add(Color.RED);
+        viewColoers.add(Color.BLACK);
+
+        ArrayList<String> animalNames = new ArrayList<>();
+        animalNames.add("Horse");
+        animalNames.add("Cow");
+        animalNames.add("Camel");
+        animalNames.add("Sheep");
+        animalNames.add("Goat");
+
+        // set up the RecyclerView
+
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvAnimals);
+        LinearLayoutManager horizontalLayoutManagaer
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManagaer);
+        adapter1 = new MyRecyclerViewAdapter(getContext(), viewColoers, animalNames);
+        adapter1.setClickListener(this);
+        recyclerView.setAdapter(adapter1);
+
+
+        //Test
     }
 
     @Nullable
@@ -124,5 +163,10 @@ public class Internal extends Fragment {
             container.removeAllViews();
         }
         return inflater.inflate(R.layout.internal, container, false);
+    }
+
+    @Override
+    public void onItemClick(View view, int position) {
+        Toast.makeText(getContext(), "You clicked " + adapter1.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 }
