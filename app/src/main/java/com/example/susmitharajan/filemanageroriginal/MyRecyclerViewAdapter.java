@@ -40,11 +40,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     // binds the data to the view and textview in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-     //   int color = mViewColors.get(position);
         String animal = mAnimals.get(position);
-      //  holder.myView.setBackgroundColor(color);
         holder.myTextView.setText(animal);
     }
+
     // total number of rows
     @Override
     public int getItemCount() {

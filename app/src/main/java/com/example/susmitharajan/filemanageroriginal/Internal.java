@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,10 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
     private List<String> fileList=new ArrayList<String>();
 
     String strtext = null;
+
+    ArrayList<String> navigation = null;
+
+    ArrayList<String> send = new ArrayList<>();
 
     private MyRecyclerViewAdapter adapter1;
 
@@ -100,16 +105,56 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
         listView.setAdapter(adapter);
 
 
+        //Test
+
+        ArrayList<Integer> viewColoers = new ArrayList<>();
+        viewColoers.add(Color.BLUE);
+        viewColoers.add(Color.YELLOW);
+        viewColoers.add(Color.MAGENTA);
+        viewColoers.add(Color.RED);
+        viewColoers.add(Color.BLACK);
+
+        /*final ArrayList<String> animalNames = new ArrayList<>();
+
+        animalNames.add("Horse");
+        animalNames.add("Cow");
+        animalNames.add("Camel");
+        animalNames.add("Sheep");
+        animalNames.add("Goat");*/
+
+        // set up the RecyclerView
+
+        navigation = new ArrayList<>();
+        navigation.add("Internal Storage");
+
+
+        navigation.addAll(send);
+
+        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvAnimals);
+        LinearLayoutManager horizontalLayoutManagaer
+                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setLayoutManager(horizontalLayoutManagaer);
+        if(navigation != null){
+            adapter1 = new MyRecyclerViewAdapter(getContext(), viewColoers, navigation);
+            adapter1.setClickListener(this);
+            recyclerView.setAdapter(adapter1);
+        }
+
+        //Test
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 custom_internal hero = heroList.get(i);
-                //Test
                 File name = new File(hero.getPath());
+                navigation.add(hero.getName());
                 if(name.isDirectory()) {
-                    //Test
                     Bundle bundle = new Bundle();
                     bundle.putString("Name", hero.getPath());
+                    //Test
+                    bundle.putStringArrayList("Navigation",navigation);
+                    //Test
                     Internal nextFrag = new Internal();
                     nextFrag.setArguments(bundle);
 
@@ -122,35 +167,6 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
 
         });
 
-
-        //Test
-
-        ArrayList<Integer> viewColoers = new ArrayList<>();
-        viewColoers.add(Color.BLUE);
-        viewColoers.add(Color.YELLOW);
-        viewColoers.add(Color.MAGENTA);
-        viewColoers.add(Color.RED);
-        viewColoers.add(Color.BLACK);
-
-        ArrayList<String> animalNames = new ArrayList<>();
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");
-
-        // set up the RecyclerView
-
-        RecyclerView recyclerView = (RecyclerView) getView().findViewById(R.id.rvAnimals);
-        LinearLayoutManager horizontalLayoutManagaer
-                = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManagaer);
-        adapter1 = new MyRecyclerViewAdapter(getContext(), viewColoers, animalNames);
-        adapter1.setClickListener(this);
-        recyclerView.setAdapter(adapter1);
-
-
-        //Test
     }
 
     @Nullable
@@ -158,6 +174,7 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(getArguments()!=null){
             strtext = getArguments().getString("Name");
+            send = getArguments().getStringArrayList("Navigation");
         }
         if(container!=null){
             container.removeAllViews();
