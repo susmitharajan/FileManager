@@ -38,7 +38,7 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
 
     String strtext = null;
 
-    ArrayList<String> navigation = null;
+    ArrayList<String> navigation = new ArrayList<>();
 
     ArrayList<String> send = new ArrayList<>();
 
@@ -125,6 +125,7 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
         // set up the RecyclerView
 
         navigation = new ArrayList<>();
+        if(send.size() == 0)
         navigation.add("Internal Storage");
 
 
