@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -185,6 +186,15 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(getContext(), "You clicked " + adapter1.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
+        int page = navigation.size() - position;
+
+        Toast.makeText(getContext(), "You clicked " + page+"-"+adapter1.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
+        for(int y = page -1 ; y > 0; y--){
+            FragmentManager fm = getFragmentManager();
+            fm.popBackStack();
+        }
     }
+
 }

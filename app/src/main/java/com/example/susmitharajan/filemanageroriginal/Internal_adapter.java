@@ -82,6 +82,8 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
         });
         return view;
     }
+
+
 }
 
 
