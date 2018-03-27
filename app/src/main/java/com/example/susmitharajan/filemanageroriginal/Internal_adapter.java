@@ -71,7 +71,9 @@ public class Internal_adapter extends ArrayAdapter<custom_internal> {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem menuItem) {
-                        Toast.makeText(getContext(),"You Clicked : " + menuItem.getTitle(),Toast.LENGTH_SHORT).show();
+                        if(menuItem.getTitle().equals("Open")){
+                            Toast.makeText(getContext(),"You Clicked" + menuItem.getTitle(),Toast.LENGTH_SHORT).show();
+                        }
                         return true;
                     }
                 });

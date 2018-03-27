@@ -45,6 +45,8 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
 
     private MyRecyclerViewAdapter adapter1;
 
+    String status = new String();
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -99,14 +101,18 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
             heroList.add(new custom_internal(R.drawable.ic_folder_black_24dp, filelist[j], lastModified[j], path[j],String.valueOf(count)));
         }
 
-        //creating the adapter
-        Internal_adapter adapter = new Internal_adapter(getContext(), R.layout.internal_listview, heroList);
+        Internal_adapter adapter=null;
 
-        //attaching adapter to the listview
+        if(status.equals("0")){
+            adapter = new Internal_adapter(getContext(), R.layout.internal_listcombo, heroList);
+        }
+        else{
+            adapter = new Internal_adapter(getContext(), R.layout.internal_listview, heroList);
+        }
+
+
+
         listView.setAdapter(adapter);
-
-
-        //Test
 
         ArrayList<Integer> viewColoers = new ArrayList<>();
         viewColoers.add(Color.BLUE);
@@ -114,16 +120,6 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
         viewColoers.add(Color.MAGENTA);
         viewColoers.add(Color.RED);
         viewColoers.add(Color.BLACK);
-
-        /*final ArrayList<String> animalNames = new ArrayList<>();
-
-        animalNames.add("Horse");
-        animalNames.add("Cow");
-        animalNames.add("Camel");
-        animalNames.add("Sheep");
-        animalNames.add("Goat");*/
-
-        // set up the RecyclerView
 
         navigation = new ArrayList<>();
         if(send.size() == 0)
@@ -142,9 +138,6 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
             recyclerView.setAdapter(adapter1);
         }
 
-        //Test
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -154,6 +147,7 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
                 if(name.isDirectory()) {
                     Bundle bundle = new Bundle();
                     bundle.putString("Name", hero.getPath());
+                    bundle.putString("Status",String.valueOf(1));
                     //Test
                     bundle.putStringArrayList("Navigation",navigation);
                     //Test
@@ -169,6 +163,36 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
 
         });
 
+
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getContext(),"Main",Toast.LENGTH_SHORT).show();
+                //test
+                custom_internal hero = heroList.get(i);
+               // File name = new File(hero.getPath());
+                navigation.add(hero.getName());
+              //  if(name.isDirectory()) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Name", strtext);
+                    bundle.putString("Status","0");
+                    //Test
+                    bundle.putStringArrayList("Navigation",navigation);
+                    //Test
+                    Internal nextFrag = new Internal();
+                    nextFrag.setArguments(bundle);
+
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.layout_container, nextFrag, "FRAGMENT_TAG")
+                            .addToBackStack(null)
+                            .commit();
+             //   }
+
+                //test
+                return true;
+            }
+        });
+
     }
 
     @Nullable
@@ -177,6 +201,7 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
         if(getArguments()!=null){
             strtext = getArguments().getString("Name");
             send = getArguments().getStringArrayList("Navigation");
+            status = getArguments().getString("Status");
         }
         if(container!=null){
             container.removeAllViews();

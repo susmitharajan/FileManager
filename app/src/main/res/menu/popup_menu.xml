@@ -13,10 +13,6 @@
         android:title="Rename"/>
 
     <item
-        android:id="@+id/copy"
-        android:title="Copy"/>
-
-    <item
         android:id="@+id/Copyto"
         android:title="Copy to"/>
 

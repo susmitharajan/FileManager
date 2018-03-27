@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+         />
+
+    <TextView
+        android:id="@+id/textViewName"
+        style="@style/Base.TextAppearance.AppCompat.Large"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        />
+
+    <ImageView
+        android:layout_toRightOf="@+id/checkBox"
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp" />
+
+    <TextView
+        android:id="@+id/textViewTeam"
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewName"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/imageView"
+        />
+
+    <ImageView
+        android:id="@+id/popup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_more_vert_black_24dp" />
+
+    <TextView
+        android:id="@+id/children"
+        style="@style/Base.TextAppearance.AppCompat.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewName"
+        android:layout_toRightOf="@id/textViewTeam"
+        />
+
+
+</RelativeLayout>
