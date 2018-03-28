@@ -69,8 +69,8 @@ public class Home extends Fragment{
 
                 }
                 else if(position == 2){
-                    /*Intent i = new Intent(getContext(),display.class);
-                    startActivity(i);*/
+                    Intent in = new Intent(getActivity(),display.class);
+                    startActivity(in);
                 }
                 else if(position == 3){
 

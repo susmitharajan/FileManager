@@ -16,5 +16,4 @@
         style="@style/Base.TextAppearance.AppCompat.Medium"
         android:textStyle="bold" />
 
-
 </LinearLayout>
