@@ -3,6 +3,7 @@ package com.example.susmitharajan.filemanageroriginal;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,8 +14,12 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**
  * Created by susmitharajan on 22/03/18.
@@ -30,6 +35,9 @@ public class Home extends Fragment{
     ArrayList<String> videos = new ArrayList<>();
     ArrayList<String> music = new ArrayList<>();
     ArrayList<String> image = new ArrayList<>();
+    ArrayList<String> document = new ArrayList<>();
+    ArrayList<String> compressed = new ArrayList<>();
+    ArrayList<String> apk = new ArrayList<>();
 
     @Nullable
     @Override
@@ -83,24 +91,28 @@ public class Home extends Fragment{
                     startActivity(in);
                 }
                 else if(position == 3){
-
+                    Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",compressed);
+                    startActivity(in);
                 }
                 else if(position == 4){
 
+
                 }
                 else if(position == 5){
-
+                    Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",apk);
+                    startActivity(in);
                 }
                 else if(position == 6){
-
+                    Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",document);
+                    startActivity(in);
                 }
                 else if(position == 7){
 
                 }
                 else if(position == 8){
-
-                }
-                else if(position == 9){
 
                 }
             }
@@ -187,6 +199,25 @@ public class Home extends Fragment{
 
     }
 
+    private void getListFiles(File parentDir) {
+        Queue<File> files = new LinkedList<>();
+        files.addAll(Arrays.asList(parentDir.listFiles()));
+        while (!files.isEmpty()) {
+            File file = files.remove();
+            if (file.isDirectory()) {
+                files.addAll(Arrays.asList(file.listFiles()));
+            } else if (file.getName().endsWith(".csv")) {
+                document.add(file.getName().toString());
+            }else if(file.getName().endsWith(".zip")){
+                compressed.add(file.getName().toString());
+            }else if(file.getName().endsWith(".apk")){
+                apk.add(file.getName().toString());
+            }
+
+        }
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -196,6 +227,9 @@ public class Home extends Fragment{
         music = displayMusicAlbums();
 
         image = displayImageAlbums();
+
+        File root=new File(Environment.getExternalStorageDirectory().getAbsolutePath());
+        getListFiles(root);
 
 
     }

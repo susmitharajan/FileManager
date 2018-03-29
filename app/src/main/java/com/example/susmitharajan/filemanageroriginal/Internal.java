@@ -37,7 +37,7 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
 
     private List<String> fileList=new ArrayList<String>();
 
-    String strtext = null;
+    String strtext = new String();
 
     ArrayList<String> navigation = new ArrayList<>();
 
@@ -55,10 +55,10 @@ public class Internal extends Fragment implements MyRecyclerViewAdapter.ItemClic
         getActivity().setTitle("Internal Storage");
 
         File root=new File(Environment.getExternalStorageDirectory().getAbsolutePath());
-       // String[] files = getListFiles(root);
-        if(strtext!=null){
+
+        /*if(strtext!=null){
             root = new File(strtext);
-        }
+        }*/
 
         File[] files = root.listFiles();
         int size = files.length;
