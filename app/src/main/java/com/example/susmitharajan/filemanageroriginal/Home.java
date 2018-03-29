@@ -27,6 +27,10 @@ public class Home extends Fragment{
     //the listview
     GridView listView;
 
+    ArrayList<String> videos = new ArrayList<>();
+    ArrayList<String> music = new ArrayList<>();
+    ArrayList<String> image = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,17 +63,23 @@ public class Home extends Fragment{
         //attaching adapter to the listview
         listView.setAdapter(adapter);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 if(position == 0){
-
+                    Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",image);
+                    startActivity(in);
                 }
                 else if(position == 1){
-
+                    Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",videos);
+                    startActivity(in);
                 }
                 else if(position == 2){
                     Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",music);
                     startActivity(in);
                 }
                 else if(position == 3){
@@ -97,9 +107,96 @@ public class Home extends Fragment{
         });
     }
 
+    ArrayList<String> displayVideoAlbums(){
+        String temp, cval;
+        ArrayList<String> albumlist = new ArrayList<>();
+        String album = MediaStore.Video.Media.ALBUM;
+        String[] albums = {album};
+        Cursor cursor=getActivity().getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,  albums, null, null, null);
+        if(cursor!=null && cursor.getCount()>0){
+            cursor.moveToFirst();
+            temp = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+            albumlist.add(temp);
+            do
+            {
+                cval = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+                //if(!temp.equals(cval))
+                if(!albumlist.contains(cval))
+                {
+                    //Here you can check for it's genre as well, up to you
+                    albumlist.add(cval);
+                    //Only add the distinct album names to albumlist
+                }
+                temp = cval;
+            } while(cursor.moveToNext());
+        }
+        return albumlist;
+
+    }
+
+    ArrayList<String> displayMusicAlbums(){
+        String temp, cval;
+        ArrayList<String> albumlist = new ArrayList<>();
+        String album = MediaStore.Audio.Media.ALBUM;
+        String[] albums = {album};
+        Cursor cursor=getActivity().getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,  albums, null, null, null);
+        if(cursor!=null && cursor.getCount() > 0){
+            cursor.moveToFirst();
+            temp = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+            albumlist.add(temp);
+            do
+            {
+                cval = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.ALBUM));
+                //if(!temp.equals(cval))
+                if(!albumlist.contains(cval))
+                {
+                    //Here you can check for it's genre as well, up to you
+                    albumlist.add(cval);
+                    //Only add the distinct album names to albumlist
+                }
+                temp = cval;
+            } while(cursor.moveToNext());
+        }
+        return albumlist;
+    }
+
+    ArrayList<String> displayImageAlbums(){
+        String temp, cval;
+        ArrayList<String> albumlist = new ArrayList<>();
+        String album = MediaStore.Images.Media.BUCKET_DISPLAY_NAME;
+        String[] albums = {album};
+        Cursor cursor=getActivity().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,  albums, null, null, null);
+        if(cursor!=null && cursor.getCount() > 0){
+            cursor.moveToFirst();
+            temp = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME));
+            albumlist.add(temp);
+            do
+            {
+                cval = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.BUCKET_DISPLAY_NAME));
+                //if(!temp.equals(cval))
+                if(!albumlist.contains(cval))
+                {
+                    //Here you can check for it's genre as well, up to you
+                    albumlist.add(cval);
+                    //Only add the distinct album names to albumlist
+                }
+                temp = cval;
+            } while(cursor.moveToNext());
+        }
+        return albumlist;
+
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        videos = displayVideoAlbums();
+
+        music = displayMusicAlbums();
+
+        image = displayImageAlbums();
+
 
     }
 }
