@@ -38,6 +38,7 @@ public class Home extends Fragment{
     ArrayList<String> document = new ArrayList<>();
     ArrayList<String> compressed = new ArrayList<>();
     ArrayList<String> apk = new ArrayList<>();
+    ArrayList<String> download = new ArrayList<>();
 
     @Nullable
     @Override
@@ -110,7 +111,9 @@ public class Home extends Fragment{
                     startActivity(in);
                 }
                 else if(position == 7){
-
+                    Intent in = new Intent(getActivity(),display.class);
+                    in.putExtra("VIDEO_ALBUM",download);
+                    startActivity(in);
                 }
                 else if(position == 8){
 
@@ -196,7 +199,6 @@ public class Home extends Fragment{
             } while(cursor.moveToNext());
         }
         return albumlist;
-
     }
 
     private void getListFiles(File parentDir) {
@@ -218,6 +220,21 @@ public class Home extends Fragment{
 
     }
 
+    private  ArrayList<String> displayDownloadfiles(File parentDir){
+        Queue<File> files = new LinkedList<>();
+        files.addAll(Arrays.asList(parentDir.listFiles()));
+        while (!files.isEmpty()) {
+            File file = files.remove();
+            if (file.isDirectory()) {
+                files.addAll(Arrays.asList(file.listFiles()));
+            }
+            else {
+                download.add(file.getName().toString());
+            }
+        }
+        return download;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -228,9 +245,13 @@ public class Home extends Fragment{
 
         image = displayImageAlbums();
 
+        //internal compressed, apk and document
         File root=new File(Environment.getExternalStorageDirectory().getAbsolutePath());
         getListFiles(root);
 
+        File externalStoragePublicDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+
+        download = displayDownloadfiles(externalStoragePublicDirectory);
 
     }
 }
